@@ -1,0 +1,62 @@
+/* ==========================================================================
+   IMAGE LAYOUT – estilos base que acompañan a renderImage()
+   (Se carga ANTES de components.css y pages.css para que las clases propias
+   de cada componente sigan definiendo el tamaño final de la imagen.)
+   ========================================================================== */
+
+.pc-img {
+  object-fit: var(--pc-img-fit, contain);
+  object-position: var(--pc-img-position, center);
+  aspect-ratio: var(--pc-img-ratio, auto);
+  -webkit-user-drag: none;
+  transition: opacity 0.35s var(--ease-out);
+}
+
+/* Fade-in: solo se oculta mientras carga si el módulo JS está activo */
+.pc-media-ready .pc-img:not(.is-loaded) {
+  opacity: 0;
+}
+
+.pc-img.is-loaded {
+  opacity: 1;
+}
+
+/* ----- Presets de layout por rol ----- */
+
+/* Logos circulares (header, menú lateral, perfil) */
+.pc-img--logo,
+.pc-img--brand {
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Miniaturas de listas */
+.pc-img--thumb {
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+}
+
+/* Imágenes de producto: nunca se deforman dentro de su contenedor flex */
+.pc-img--category,
+.pc-img--card,
+.pc-img--hero,
+.pc-img--promo {
+  min-width: 0;
+  min-height: 0;
+}
+
+/* Imagen de respaldo (cuando la original no cargó) */
+.pc-img.is-fallback {
+  object-fit: contain;
+  opacity: 0.85;
+}
+
+/* Placeholder final si ni la imagen ni el respaldo cargaron */
+.pc-img.is-broken {
+  opacity: 1;
+  background:
+    radial-gradient(circle at 50% 42%, var(--pc-red-soft) 0 34%, transparent 35%),
+    var(--bg-surface-alt);
+  border-radius: var(--radius-md);
+  color: transparent;
+}
