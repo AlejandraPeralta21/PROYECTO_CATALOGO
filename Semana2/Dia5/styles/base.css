@@ -1,0 +1,189 @@
+/* ==========================================================================
+   BASE STYLES & ZERO-SCROLL SHELL
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  overflow: hidden;
+  font-family: var(--font-body);
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  transition: var(--theme-transition);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  user-select: none;
+}
+
+html:has(body.login-active),
+body.login-active {
+  background-color: #101114;
+}
+
+input,
+textarea {
+  user-select: text;
+  font-family: inherit;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--pc-red);
+  outline-offset: 2px;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.app-shell {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--bg-app);
+  transition: var(--theme-transition);
+}
+
+.page-root {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-view {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: pageEnter 0.32s var(--ease-out) both;
+}
+
+.page-container {
+  width: 100%;
+  max-width: var(--container-max);
+  height: 100%;
+  min-height: 0;
+  margin: 0 auto;
+  padding: 8px 16px 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .page-container {
+    padding: 10px 24px 12px;
+  }
+}
+
+/* Global Keyframes */
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.992);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-7px); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 24px rgba(237, 16, 31, 0.45), 0 0 60px rgba(237, 16, 31, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 36px rgba(237, 16, 31, 0.72), 0 0 84px rgba(237, 16, 31, 0.35);
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.25; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes rocketFlight {
+  0% { transform: translate(-18px, 18px) rotate(-4deg); }
+  50% { transform: translate(6px, -6px) rotate(2deg); }
+  100% { transform: translate(22px, -22px) rotate(4deg); }
+}
+
+@keyframes popSelect {
+  0% { transform: scale(1); }
+  45% { transform: scale(0.94); }
+  100% { transform: scale(1.02); }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* On wide desktop screens, present the app as a centered mobile PWA frame. */
+@media (min-width: 1025px) {
+  html,
+  body {
+    min-height: 100dvh;
+  }
+
+  body {
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    background: #eef1f5;
+  }
+
+  .app-shell {
+    width: min(768px, calc(100vw - 40px));
+    height: min(920px, calc(100dvh - 40px));
+    min-height: 0;
+    border: 1px solid rgba(16, 17, 20, 0.12);
+    border-top: 4px solid var(--pc-red);
+    border-radius: 24px;
+    box-shadow: 0 18px 60px rgba(16, 17, 20, 0.16);
+  }
+}
