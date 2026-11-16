@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#ED101F" />
+  <title>Diagnóstico local de código PWA</title>
+  <style>
+    :root { color-scheme: dark; font: 15px/1.5 system-ui, sans-serif; background: #101114; color: #f7f7f8; }
+    body { max-width: 900px; min-height: 100dvh; margin: 0 auto; padding: 20px; }
+    h1 { color: #ff3441; font-size: clamp(1.45rem, 4vw, 2rem); }
+    p, li { color: #c6c7cc; }
+    .diagnostic-card { margin: 14px 0; padding: 16px; border: 1px solid #34363d; border-radius: 16px; background: #1b1c22; }
+    label { display: block; margin: 10px 0 5px; font-weight: 700; }
+    textarea { display: block; width: 100%; min-height: 180px; padding: 12px; resize: vertical; border: 1px solid #3a3c44; border-radius: 10px; background: #111216; color: #f5d66c; font: 13px/1.5 ui-monospace, monospace; }
+    button { margin-top: 12px; padding: 11px 16px; border: 0; border-radius: 999px; background: #ed101f; color: #fff; font: inherit; font-weight: 800; cursor: pointer; }
+    button:hover { filter: brightness(1.12); }
+    .badge { display: inline-block; margin-right: 6px; padding: 2px 7px; border-radius: 5px; font-size: 11px; font-weight: 800; }
+    .warning { background: #7a2d16; color: #ffd4c0; }
+    .success { background: #145c3b; color: #c8f7de; }
+    #panelResultado[hidden] { display: none; }
+    #detallesReporte p { margin-bottom: 7px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Diagnóstico de código PWA y DOM</h1>
+    <p>El análisis se realiza en este dispositivo. El código pegado no se envía a ningún servidor.</p>
+    <section class="diagnostic-card" aria-labelledby="diagnostic-title">
+      <h2 id="diagnostic-title">Analizar HTML y CSS</h2>
+      <label for="codigoInput">Código para analizar</label>
+      <textarea id="codigoInput" placeholder="Pega aquí tu HTML, CSS o JavaScript..."></textarea>
+      <button type="button" id="btnAnalizar">Analizar y sugerir mejoras</button>
+    </section>
+    <section class="diagnostic-card" id="panelResultado" aria-live="polite" hidden>
+      <h2>Informe de diagnóstico</h2>
+      <div id="detallesReporte"></div>
+      <label for="codigoSugerido">Código sugerido</label>
+      <textarea id="codigoSugerido" readonly></textarea>
+    </section>
+  </main>
+  <script>
+    (function () {
+      const suspiciousClasses = [
+        { name: 'ad-banner', suggestion: 'banner-informativo' },
+        { name: 'promo-box', suggestion: 'promocion-destacada' },
+        { name: 'social-ads', suggestion: 'redes-contacto' },
+        { name: 'analytics', suggestion: 'metricas-locales' },
+        { name: 'tracker', suggestion: 'seguimiento-local' },
+      ];
+      const input = document.getElementById('codigoInput');
+      const output = document.getElementById('codigoSugerido');
+      const report = document.getElementById('detallesReporte');
+      const panel = document.getElementById('panelResultado');
+
+      document.getElementById('btnAnalizar').addEventListener('click', function () {
+        const source = input.value;
+        if (!source.trim()) {
+          input.focus();
+          return;
+        }
+
+        let suggested = source;
+        const findings = [];
+        suspiciousClasses.forEach(({ name, suggestion }) => {
+          const pattern = new RegExp(`(^|[^\\w-])${name}\\b`, 'i');
+          if (pattern.test(source)) {
+            findings.push(`Se encontró la clase o término "${name}"; algunos bloqueadores pueden ocultarlo. Se sugiere "${suggestion}".`);
+            suggested = suggested.replace(new RegExp(`\\b${name}\\b`, 'gi'), suggestion);
+          }
+        });
+
+        const fixedViewport = /height\s*:\s*100vh\s*;/i.test(source) && !/min-height\s*:\s*100dvh/i.test(source);
+        if (fixedViewport) {
+          findings.push('Se encontró height: 100vh; puede desbordar en celulares. La sugerencia lo cambia a min-height: 100dvh.');
+          suggested = suggested.replace(/height\s*:\s*100vh\s*;/gi, 'min-height: 100dvh;');
+        }
+
+        report.replaceChildren();
+        const summary = document.createElement('p');
+        const badge = document.createElement('span');
+        badge.className = `badge ${findings.length ? 'warning' : 'success'}`;
+        badge.textContent = findings.length ? 'REVISAR' : 'LIMPIO';
+        summary.append(badge, document.createTextNode(findings.length ? `Se encontraron ${findings.length} posible(s) mejora(s).` : 'No se encontraron los patrones revisados.'));
+        report.append(summary);
+
+        if (findings.length) {
+          const list = document.createElement('ul');
+          findings.forEach((finding) => {
+            const item = document.createElement('li');
+            item.textContent = finding;
+            list.append(item);
+          });
+          report.append(list);
+        }
+        output.value = suggested;
+        panel.hidden = false;
+      });
+    })();
+  </script>
+</body>
+</html>
