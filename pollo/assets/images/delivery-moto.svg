@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 440" fill="none">
+  <title>Motocicleta de delivery de Planet Chicken</title>
+  <ellipse cx="325" cy="380" rx="238" ry="27" fill="#B90016" opacity=".12"/>
+  <circle cx="330" cy="217" r="186" fill="#FFE5E7"/>
+  <circle cx="487" cy="91" r="28" fill="#FFD100"/>
+  <path d="M104 324c52-41 95-48 132-27 25 14 46 18 70 6 32-16 61-12 86 8" stroke="#F7B5BA" stroke-width="9" stroke-linecap="round"/>
+  <path d="M98 349h444" stroke="#DBDDE2" stroke-width="7" stroke-linecap="round"/>
+  <!-- rear wheel -->
+  <circle cx="178" cy="333" r="63" fill="#17191E"/>
+  <circle cx="178" cy="333" r="43" fill="#F4F4F4"/>
+  <circle cx="178" cy="333" r="17" fill="#ED101F"/>
+  <circle cx="178" cy="333" r="5" fill="#fff"/>
+  <!-- front wheel -->
+  <circle cx="464" cy="333" r="63" fill="#17191E"/>
+  <circle cx="464" cy="333" r="43" fill="#F4F4F4"/>
+  <circle cx="464" cy="333" r="17" fill="#ED101F"/>
+  <circle cx="464" cy="333" r="5" fill="#fff"/>
+  <!-- scooter frame and body -->
+  <path d="m178 333 71-83 93 83H178l58-72 99-4" stroke="#24262D" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m322 256 30-100 41-7 42 173" stroke="#25272E" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M229 242h84c25 0 46 20 46 45v30H218v-47c0-15 2-28 11-28Z" fill="#ED101F"/>
+  <path d="M217 294h145v21H217z" fill="#B90016"/>
+  <path d="M232 238h79l-14-25h-50c-12 0-20 9-15 25Z" fill="#24262D"/>
+  <path d="M334 247c17-18 35-20 51-13l23 19-25 13-42-3" fill="#FFCA9C"/>
+  <path d="m373 246 65-9" stroke="#25272E" stroke-width="10" stroke-linecap="round"/>
+  <path d="m427 235 32-11" stroke="#25272E" stroke-width="8" stroke-linecap="round"/>
+  <path d="M439 220h27" stroke="#FFD100" stroke-width="9" stroke-linecap="round"/>
+  <path d="m365 289 20 1" stroke="#FFD100" stroke-width="9" stroke-linecap="round"/>
+  <path d="M220 331h-34" stroke="#25272E" stroke-width="14" stroke-linecap="round"/>
+  <path d="M428 332h-33" stroke="#25272E" stroke-width="14" stroke-linecap="round"/>
+  <!-- rider -->
+  <path d="m293 225 15-46 56 2 23 50-30 32-51-9-29-16 16-13Z" fill="#ED101F"/>
+  <path d="m313 181 37-39 41 18-20 36-58-15Z" fill="#25272E"/>
+  <path d="m347 146 15-28 38-1 22 27-17 23-58-21Z" fill="#FFD100"/>
+  <path d="m385 129 26 1 15 17-17 14-29-10 5-22Z" fill="#ED101F"/>
+  <path d="m295 205-47 40" stroke="#F2B38D" stroke-width="17" stroke-linecap="round"/>
+  <path d="m361 211 38 29" stroke="#F2B38D" stroke-width="16" stroke-linecap="round"/>
+  <path d="m247 244 13 6" stroke="#25272E" stroke-width="13" stroke-linecap="round"/>
+  <path d="m397 237 11 8" stroke="#25272E" stroke-width="12" stroke-linecap="round"/>
+  <!-- branded insulated bag -->
+  <path d="M216 107c0-10 8-18 18-18h105c10 0 18 8 18 18v77H216v-77Z" fill="#B90016"/>
+  <path d="M216 106c0-10 8-18 18-18h105c10 0 18 8 18 18v14H216v-14Z" fill="#ED101F"/>
+  <path d="M244 88V76c0-9 7-16 16-16h54c9 0 16 7 16 16v12" stroke="#25272E" stroke-width="10"/>
+  <path d="M239 130h95v36h-95z" fill="#fff"/>
+  <text x="286" y="155" fill="#ED101F" font-family="Arial,sans-serif" font-size="27" font-weight="900" text-anchor="middle">PC</text>
+  <path d="M121 143c-15-18-15-42 1-58" stroke="#ED101F" stroke-width="7" stroke-linecap="round"/>
+  <path d="M98 152c-22-29-22-65 1-92" stroke="#ED101F" stroke-width="7" stroke-linecap="round" opacity=".4"/>
+  <path d="m524 173 9 18 19 3-14 13 3 19-17-9-17 9 3-19-14-13 19-3 9-18Z" fill="#FFD100"/>
+</svg>
